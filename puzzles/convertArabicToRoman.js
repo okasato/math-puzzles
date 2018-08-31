@@ -20,14 +20,17 @@ const ARABIC_TO_ROMAN = {
 }
 
 const convertArabicToRoman_1 = number => {
-  let output = '';
+  
   const convert = (number, digit) => {
+    let output = '';
     for (let i = 0; i < Math.floor(number / digit); i += 1) {
       output += ARABIC_TO_ROMAN[digit];
     }
-  }
+    return output;
+  };
 
-  convert(number, 1000);
+  let output = '';
+  output += convert(number, 1000);
   number = number % 1000;
 
   if (number >= 900 && number <= 999) {
@@ -35,9 +38,9 @@ const convertArabicToRoman_1 = number => {
   } else if (number >= 400 && number <= 499) {
     output += ARABIC_TO_ROMAN[400];
   } else {
-    convert(number, 500);
+    output += convert(number, 500);
     number = number % 500;
-    convert(number, 100);
+    output += convert(number, 100);
   }
 
   number = number % 100;
@@ -47,9 +50,9 @@ const convertArabicToRoman_1 = number => {
   } else if (number >= 40 && number <= 49) {
     output += ARABIC_TO_ROMAN[40];
   } else {
-    convert(number, 50);
+    output += convert(number, 50);
     number = number % 50;
-    convert(number, 10);
+    output += convert(number, 10);
   }
 
   number = number % 10;
@@ -59,9 +62,9 @@ const convertArabicToRoman_1 = number => {
   } else if (number === 4) {
     output += ARABIC_TO_ROMAN[4];
   } else {
-    convert(number, 5);
+    output += convert(number, 5);
     number = number % 5;
-    convert(number, 1);
+    output += convert(number, 1);
   }
 
   return output;
@@ -69,20 +72,20 @@ const convertArabicToRoman_1 = number => {
 
 
 const convertArabicToRoman_2 = number => {
-  
+
   const convert = (number, i, v, x) => {
     let result = '';
     if (number === 9) {
-      result = result + i + x;
+      result += i + x;
     } else if (number === 4) {
-      result = result + i + v;
+      result += i + v;
     } else {
       for (let j = 0; j < Math.floor(number / 5); j += 1){
-        result = result + v;
+        result += v;
       }
       number = number % 5;
       for (let j = 0; j < number; j += 1){
-        result = result + i;
+        result +=  i;
       }
     }
     return result;
@@ -91,17 +94,17 @@ const convertArabicToRoman_2 = number => {
   let result = '';
   
   for (let i = 0; i < Math.floor(number / 1000); i += 1){
-    result = result + 'M';
+    result += 'M';
   }
 
   number = number % 1000;
-  result = result + convert(Math.floor(number / 100), 'C', 'D', 'M');
+  result += convert(Math.floor(number / 100), 'C', 'D', 'M');
 
   number = number % 100;
-  result = result + convert(Math.floor(number / 10), 'X', 'L', 'C');
+  result += convert(Math.floor(number / 10), 'X', 'L', 'C');
 
   number = number % 10;
-  result = result + convert(number, 'I', 'V', 'X');
+  result += convert(number, 'I', 'V', 'X');
 
   return result;
 }
