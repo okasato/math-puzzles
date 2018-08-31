@@ -22,52 +22,52 @@ const ARABIC_TO_ROMAN = {
 const convertArabicToRoman_1 = number => {
   
   const convert = (number, digit) => {
-    let output = '';
+    let result = '';
     for (let i = 0; i < Math.floor(number / digit); i += 1) {
-      output += ARABIC_TO_ROMAN[digit];
+      result += ARABIC_TO_ROMAN[digit];
     }
-    return output;
+    return result;
   };
 
-  let output = '';
-  output += convert(number, 1000);
+  let result = '';
+  result += convert(number, 1000);
   number = number % 1000;
 
   if (number >= 900 && number <= 999) {
-    output += ARABIC_TO_ROMAN[900];
+    result += ARABIC_TO_ROMAN[900];
   } else if (number >= 400 && number <= 499) {
-    output += ARABIC_TO_ROMAN[400];
+    result += ARABIC_TO_ROMAN[400];
   } else {
-    output += convert(number, 500);
+    result += convert(number, 500);
     number = number % 500;
-    output += convert(number, 100);
+    result += convert(number, 100);
   }
 
   number = number % 100;
 
   if (number >= 90 && number <= 99) {
-    output += ARABIC_TO_ROMAN[90];
+    result += ARABIC_TO_ROMAN[90];
   } else if (number >= 40 && number <= 49) {
-    output += ARABIC_TO_ROMAN[40];
+    result += ARABIC_TO_ROMAN[40];
   } else {
-    output += convert(number, 50);
+    result += convert(number, 50);
     number = number % 50;
-    output += convert(number, 10);
+    result += convert(number, 10);
   }
 
   number = number % 10;
 
   if (number === 9) {
-    output += ARABIC_TO_ROMAN[9];
+    result += ARABIC_TO_ROMAN[9];
   } else if (number === 4) {
-    output += ARABIC_TO_ROMAN[4];
+    result += ARABIC_TO_ROMAN[4];
   } else {
-    output += convert(number, 5);
+    result += convert(number, 5);
     number = number % 5;
-    output += convert(number, 1);
+    result += convert(number, 1);
   }
 
-  return output;
+  return result;
 };
 
 
