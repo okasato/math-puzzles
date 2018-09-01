@@ -12,7 +12,8 @@ const pascal = n => {
 	}
 
 	const formerLevel = pascal(n-1);
-	let newLevel = [1];
+  let newLevel = [];
+  newLevel.push(1);
 	for (let i = 0; i < formerLevel.length; i += 1){
 		if (formerLevel[i+1]) {
 			let element = formerLevel[i] + formerLevel[i+1];
